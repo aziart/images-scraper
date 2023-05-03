@@ -3,8 +3,8 @@ import time
 import requests
 from selenium import webdriver
 
-
-def fetch_image_urls(query: str, max_links_to_fetch: int, wd: webdriver, sleep_between_interactions: int = 1):
+# IF THERE'S A FREEZING IN SAVING FILES TO THE SYSTEM, CONSIDER CHANGING "sleep_between_interactions" ARGUMENT
+def fetch_image_urls(query: str, max_links_to_fetch: int, wd: webdriver, sleep_between_interactions: int = 2):
     def scroll_to_end(wd):
         wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(sleep_between_interactions)
@@ -81,7 +81,7 @@ def persist_image(folder_path:str,url:str, counter):
         print(f"ERROR - Could not save {url} - {e}")
 
 
-def search_and_download(search_term: str, driver_path: str, target_path='03 - Web applications (Microservices)/0410 - Image Scraper/images', number_images=10):
+def search_and_download(search_term: str, driver_path: str, target_path='images', number_images=10):
     target_folder = os.path.join(target_path, '_'.join(search_term.lower().split(' ')))
 
     if not os.path.exists(target_folder):
@@ -104,8 +104,8 @@ def search_and_download(search_term: str, driver_path: str, target_path='03 - We
 # Step 5 : put it inside the same folder of this code
 
 
-DRIVER_PATH = r'03 - Web applications (Microservices)/0410 - Image Scraper/chromedriver'
-search_term = 'audi'
-# num of images you can pass it from here  by default it's 10 if you are not passing
+DRIVER_PATH = r'/Users/lecha/dev/projects/proj-images-scraper/chromedriver'
+search_term = 'tesla'
+# num of images you can pass it from here  by default it's 5 if you are not passing
 #number_images = 50
-search_and_download(search_term=search_term, driver_path=DRIVER_PATH, number_images=10)
+search_and_download(search_term=search_term, driver_path=DRIVER_PATH, number_images=5)
